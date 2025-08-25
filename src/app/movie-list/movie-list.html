@@ -1,0 +1,32 @@
+<div class="toolbar">
+  <h2>🎬 Harry Potter Movies <span>(Avg: {{ avgRating }} ⭐)</span></h2>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput [(ngModel)]="search">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Genre</mat-label>
+    <mat-select [(ngModel)]="selectedGenre">
+      <mat-option value="">All</mat-option>
+      <mat-option value="Fantasy">Fantasy</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <label>Min Rating: {{ minRating }} ⭐</label>
+  <mat-slider min="1" max="5" step="1" [(ngModel)]="minRating"></mat-slider>
+</div>
+
+<div class="grid">
+  <mat-card *ngFor="let movie of filteredMovies">
+    <img mat-card-image [src]="movie.poster">
+    <mat-card-title>{{ movie.title }}</mat-card-title>
+    <mat-card-subtitle>{{ movie.genre }}</mat-card-subtitle>
+    <p>{{ movie.description }}</p>
+  </mat-card>
+</div>
+
+<div *ngIf="filteredMovies.length === 0">
+  <mat-icon>sentiment_dissatisfied</mat-icon> No movies found
+</div>
